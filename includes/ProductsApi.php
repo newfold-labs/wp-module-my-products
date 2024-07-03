@@ -75,6 +75,6 @@ class ProductsApi {
 			$products = $payload;
 		}
 
-		return new \WP_REST_Response( $products, 201 );
+		return new \WP_REST_Response( $products, 200 );
 	}
 }
