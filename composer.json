@@ -1,5 +1,5 @@
 {
-  "name": "newfold-labs/wp-module-products",
+  "name": "newfold-labs/wp-module-my-products",
   "description": "A module for rendering user-specific product data utilizing the Hiive Users API, which integrates with the Fulfilment Gateway API.",
   "type": "library",
   "license": "GPL-2.0-or-later",
@@ -24,7 +24,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "NewfoldLabs\\WP\\Module\\Products\\": "includes"
+      "NewfoldLabs\\WP\\Module\\MyProducts\\": "includes"
     },
     "files": [
       "bootstrap.php"
@@ -36,7 +36,9 @@
     }
   },
   "require": {
-    "newfold-labs/wp-module-data": "^2.5.2"
+    "newfold-labs/wp-module-data": "^2.5.2",
+    "newfold-labs/wp-module-context": "^1.0",
+    "newfold-labs/wp-module-features": "^1.3.0"
   },
   "require-dev": {
     "newfold-labs/wp-php-standards": "^1.2"

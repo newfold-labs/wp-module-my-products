@@ -1,28 +1,14 @@
 <?php
 
-use NewfoldLabs\WP\ModuleLoader\Container;
-use NewfoldLabs\WP\Module\Products\Products;
+namespace NewfoldLabs\WP\Module\MyProducts;
 
 use function NewfoldLabs\WP\ModuleLoader\register;
 
-if ( function_exists( 'add_action' ) ) {
-
-	add_action(
-		'plugins_loaded',
-		function () {
-
-			register(
-				array(
-					'name'     => 'products',
-					'label'    => __( 'Products', 'newfold-module-products' ),
-					'callback' => function ( Container $container ) {
-						new Products( $container );
-					},
-					'isActive' => true,
-					'isHidden' => true,
-				)
-			);
+if ( function_exists( 'add_filter' ) ) {
+	add_filter(
+		'newfold/features/filter/register',
+		function ( $features ) {
+			return array_merge( $features, array( MyProductsFeature::class ) );
 		}
 	);
-
 }

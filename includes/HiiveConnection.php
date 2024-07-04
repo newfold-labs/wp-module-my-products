@@ -1,6 +1,6 @@
 <?php
 
-namespace NewfoldLabs\WP\Module\Products;
+namespace NewfoldLabs\WP\Module\MyProducts;
 
 use NewfoldLabs\WP\Module\Data\HiiveConnection as DataModuleHiiveConnection;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace NewfoldLabs\WP\Module\Products;
+namespace NewfoldLabs\WP\Module\MyProducts;
 
 use NewfoldLabs\WP\ModuleLoader\Container;
-use NewfoldLabs\WP\Module\Products\HiiveConnection;
+use NewfoldLabs\WP\Module\MyProducts\HiiveConnection;
 
 /**
- * Class for handling the initialization of the marketplace module.
+ * Class for handling the initialization of the My Products module.
  */
 class Products {
 

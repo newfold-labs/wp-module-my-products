@@ -1,8 +1,8 @@
 <?php
 
-namespace NewFoldLabs\WP\Module\Products;
+namespace NewFoldLabs\WP\Module\MyProducts;
 
-use NewfoldLabs\WP\Module\Products\HiiveConnection;
+use NewfoldLabs\WP\Module\MyProducts\HiiveConnection;
 use WP_REST_Controller;
 use WP_REST_Server;
 use function NewfoldLabs\WP\ModuleLoader\container;
@@ -36,7 +36,7 @@ class ProductsApi {
 	 */
 	public function register_routes() {
 
-		// Add route for fetching marketplace products per brand
+		// Add route for fetching user products
 		register_rest_route(
 			$this->namespace,
 			$this->rest_base,
