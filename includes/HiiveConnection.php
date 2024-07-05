@@ -29,7 +29,7 @@ class HiiveConnection extends DataModuleHiiveConnection {
 			),
 		);
 
-		$request_reponse = wp_remote_get( $this->get_api_url() . '/sites/v1/customer/products', $args );
+		$request_reponse = wp_remote_get( NFD_HIIVE_URL . '/sites/v1/customer/products', $args );
 
 		if ( 403 === wp_remote_retrieve_response_code( $request_reponse ) ) {
 			$body = json_decode( $request_reponse['body'], true );
