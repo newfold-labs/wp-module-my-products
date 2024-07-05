@@ -38,7 +38,7 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 	useEffect( () => {
 		if ( methods.isJarvis() ) {
 			methods.apiFetch( {
-				url: methods.NewfoldRuntime.createApiUrl( constants.productendpoint ),
+				url: methods.NewfoldRuntime.createApiUrl( '/newfold-products/v1/products' ),
 				method: 'POST',
 			} )
 				.then( ( response ) => {

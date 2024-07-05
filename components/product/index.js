@@ -2,7 +2,6 @@ import { Container } from '@newfold/ui-component-library';
 import ProductsTable from '../productTable';
 
 const defaults = {
-	productendpoint: '/newfold-products/v1/products',
 	text: {
         title: 'My Products', 
 		jarvisText: 'Please login to your account manager to see products.',
