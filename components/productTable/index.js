@@ -2,13 +2,13 @@ import { Table } from '@newfold/ui-component-library';
 
 const formatDate = ( dateString ) => {
 	if ( typeof dateString !== 'string' ) {
-		return '<date>';
+		return '';
 	}
 
 	const date = new Date( dateString );
 	// Check if the date is valid
 	if ( isNaN( date.getTime() ) ) {
-		return '<date>';
+		return '';
 	}
 
 	const month = ( date.getMonth() + 1 ).toString().padStart( 2, '0' );
@@ -21,14 +21,14 @@ const formatDate = ( dateString ) => {
 const determineMessage = ( autoRenewFlag, expirationDate ) => {
 	const formattedDate = formatDate( expirationDate );
 	if ( autoRenewFlag === true ) {
-		return `Auto-renews: ${ formattedDate }`;
+		return `${__( 'Auto-renews:', 'wp-plugin-bluehost' )} ${formattedDate}`;
 	}
-	return `Expires: ${ formattedDate }`;
+	return `${__( 'Expires:', 'wp-plugin-bluehost' )} ${formattedDate}`;
 };
 
 const ProductsTable = ( { methods, constants, ...props } ) => {
     
-	const [ productData, setProductData ] = methods.useState( '' );
+	const [ productData, setProductData ] = methods.useState( [] );
 	const [ isError, setIsError ] = methods.useState( false );
 	const [ isErrorMsg, setIsErrorMsg ] = methods.useState( '' );
 
@@ -38,7 +38,7 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 	useEffect( () => {
 		if ( methods.isJarvis() ) {
 			methods.apiFetch( {
-				url: methods.NewfoldRuntime.createApiUrl( '/newfold-products/v1/products' ),
+				url: methods.NewfoldRuntime.createApiUrl( '/newfold-my-products/v1/products' ),
 				method: 'POST',
 			} )
 				.then( ( response ) => {
@@ -57,7 +57,7 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 					} else {
 						setIsErrorMsg( constants.text.error );
 					}
-					setProductData( null ); // Or any default value you want to set
+					setProductData( [] ); // Or any default value
 				} );
 		}
 	}, [] );
@@ -66,13 +66,13 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 		<div>
 			{ isError && isErrorMsg }
 			{ ! methods.isJarvis() && ! isError && constants.text.jarvisText }
-			{ methods.isJarvis() && ! isError && productData && (
+			{ methods.isJarvis() && ! isError && ( Array.isArray( productData ) && productData.length === 0 ) && (
 				<Table className="wppbh-products-data-section">
 					<Table.Head>
 						<Table.Row>
-							<Table.Header>Products & Services</Table.Header>
-							<Table.Header>Renewal Date</Table.Header>
-							<Table.Header>Renewal Setting</Table.Header>
+							<Table.Header>{__( 'Products & Services', 'wp-plugin-bluehost' )}</Table.Header>
+							<Table.Header>{__( 'Renewal Date', 'wp-plugin-bluehost' )}</Table.Header>
+							<Table.Header>{__( 'Renewal Setting', 'wp-plugin-bluehost' )}</Table.Header>
 						</Table.Row>
 					</Table.Head>
 					<Table.Body>
@@ -87,7 +87,7 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 								</Table.Cell>
 								<Table.Cell>
 									<a href="https://www.bluehost.com/my-account/renewal-center">
-										Manage Renewal
+									{__( 'Manage Renewal', 'wp-plugin-bluehost' )}
 									</a>
 								</Table.Cell>
 							</Table.Row>
