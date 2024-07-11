@@ -2,11 +2,15 @@
 
 namespace NewFoldLabs\WP\Module\MyProducts;
 
-use NewfoldLabs\WP\Module\MyProducts\HiiveConnection;
+use NewfoldLabs\WP\Module\Data\HiiveConnection;
 use WP_REST_Controller;
 use WP_REST_Server;
 use function NewfoldLabs\WP\ModuleLoader\container;
 
+/**
+ * Hiive API endpoint for fetching products.
+ */
+define( 'HIIVE_API_PRODUCTS_ENDPOINT', 'sites/v1/customer/products' );
 
 /**
  * Class ProductsApi
@@ -58,7 +62,10 @@ class ProductsApi {
 	public function products_callback() {
 
 		$products       = array();
-		$hiive_response = $this->hiive->get_products();
+		$args           = array(
+			'method' => 'GET',
+		);
+		$hiive_response = $this->hiive->hiive_request( HIIVE_API_PRODUCTS_ENDPOINT, array(), $args );
 
 		if ( is_wp_error( $hiive_response ) ) {
 			return new \WP_REST_Response( $hiive_response->get_error_message(), 401 );

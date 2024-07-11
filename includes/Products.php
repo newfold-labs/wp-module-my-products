@@ -3,7 +3,7 @@
 namespace NewfoldLabs\WP\Module\MyProducts;
 
 use NewfoldLabs\WP\ModuleLoader\Container;
-use NewfoldLabs\WP\Module\MyProducts\HiiveConnection;
+use NewfoldLabs\WP\Module\Data\HiiveConnection;
 
 /**
  * Class for handling the initialization of the My Products module.
