@@ -3,10 +3,9 @@ import ProductsTable from '../productTable';
 
 const defaults = {
 	text: {
-        title: 'My Products', 
-		jarvisText: 'Please login to your account manager to see products.',
-		error: 'Oops, there was an error loading products, please try again later.',
-		noProducts: 'Sorry, no products. Please, try again later.',
+		jarvisText: __( 'Please login to your account manager to see products.', 'wp-plugin-bluehost' ),
+		error: __( 'Oops, there was an error loading products, please try again later.', 'wp-plugin-bluehost' ),
+		noProducts: __( 'Sorry, no products. Please, try again later.', 'wp-plugin-bluehost' ),
 	},
 };
 

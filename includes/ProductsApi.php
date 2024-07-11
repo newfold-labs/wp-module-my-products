@@ -31,7 +31,7 @@ class ProductsApi {
 	 */
 	public function __construct( HiiveConnection $hiive ) {
 		$this->hiive     = $hiive;
-		$this->namespace = 'newfold-products/v1';
+		$this->namespace = 'newfold-my-products/v1';
 		$this->rest_base = '/products';
 	}
 

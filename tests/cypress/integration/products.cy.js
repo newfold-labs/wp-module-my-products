@@ -28,7 +28,7 @@ describe( 'My Products', function () {
 	it( 'Products Section Renders Correctly', () => {
 		cy.intercept(
 			'POST',
-			'/index.php?rest_route=%2Fnewfold-products%2Fv1%2Fproducts&_locale=user',
+			'/index.php?rest_route=%2Fnewfold-my-products%2Fv1%2Fproducts&_locale=user',
 			productFixtures
 		);
 		cy.reload();
@@ -41,7 +41,7 @@ describe( 'My Products', function () {
 	it( 'Products Section Renders Correctly for No products response', () => {
 		cy.intercept(
 			'POST',
-			'/index.php?rest_route=%2Fnewfold-products%2Fv1%2Fproducts&_locale=user',
+			'/index.php?rest_route=%2Fnewfold-my-products%2Fv1%2Fproducts&_locale=user',
 			[]
 		);
 		cy.reload();
@@ -54,7 +54,7 @@ describe( 'My Products', function () {
 	it( 'Products Section Renders Correctly for Empty response', () => {
 		cy.intercept(
 			'POST',
-			'/index.php?rest_route=%2Fnewfold-products%2Fv1%2Fproducts&_locale=user',
+			'/index.php?rest_route=%2Fnewfold-my-products%2Fv1%2Fproducts&_locale=user',
 			{}
 		);
 		cy.reload();
