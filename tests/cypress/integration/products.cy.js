@@ -27,20 +27,22 @@ describe( 'My Products', function () {
 
 	it( 'Products Section Renders Correctly', () => {
 		cy.intercept(
-			'POST',
+			'GET',
 			'/index.php?rest_route=%2Fnewfold-my-products%2Fv1%2Fproducts&_locale=user',
 			productFixtures
 		);
 		cy.reload();
-		cy.get( '.wppbh-products-data-section' )
-			.contains( 'Products & Services' )
-			.scrollIntoView()
-			.should( 'be.visible' );
+		// Verify the table contains the correct product data
+        cy.get('.wppbh-products-data-section').within(() => {
+            cy.contains('Products & Services').should('be.visible');
+            cy.contains('Free SSL').should('be.visible');
+            cy.contains('SiteLock Lite').should('be.visible');
+        });
 	} );
 
 	it( 'Products Section Renders Correctly for No products response', () => {
 		cy.intercept(
-			'POST',
+			'GET',
 			'/index.php?rest_route=%2Fnewfold-my-products%2Fv1%2Fproducts&_locale=user',
 			[]
 		);
@@ -53,7 +55,7 @@ describe( 'My Products', function () {
 
 	it( 'Products Section Renders Correctly for Empty response', () => {
 		cy.intercept(
-			'POST',
+			'GET',
 			'/index.php?rest_route=%2Fnewfold-my-products%2Fv1%2Fproducts&_locale=user',
 			{}
 		);

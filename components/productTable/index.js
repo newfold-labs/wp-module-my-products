@@ -21,9 +21,9 @@ const formatDate = ( dateString ) => {
 const determineMessage = ( autoRenewFlag, expirationDate ) => {
 	const formattedDate = formatDate( expirationDate );
 	if ( autoRenewFlag === true ) {
-		return `${__( 'Auto-renews:', 'wp-plugin-bluehost' )} ${formattedDate}`;
+		return `${__( 'Auto-renews:', 'wp-module-my-products' )} ${formattedDate}`;
 	}
-	return `${__( 'Expires:', 'wp-plugin-bluehost' )} ${formattedDate}`;
+	return `${__( 'Expires:', 'wp-module-my-products' )} ${formattedDate}`;
 };
 
 const ProductsTable = ( { methods, constants, ...props } ) => {
@@ -39,7 +39,7 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 		if ( methods.isJarvis() ) {
 			methods.apiFetch( {
 				url: methods.NewfoldRuntime.createApiUrl( '/newfold-my-products/v1/products' ),
-				method: 'POST',
+				method: 'GET',
 			} )
 				.then( ( response ) => {
 					if ( ! response ) {
@@ -60,19 +60,20 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 					setProductData( [] ); // Or any default value
 				} );
 		}
+		console.log(productData);
 	}, [] );
     
 	return (
 		<div>
 			{ isError && isErrorMsg }
 			{ ! methods.isJarvis() && ! isError && constants.text.jarvisText }
-			{ methods.isJarvis() && ! isError && ( Array.isArray( productData ) && productData.length === 0 ) && (
+			{ methods.isJarvis() && ! isError && ( Array.isArray( productData ) && productData.length > 0 ) && (
 				<Table className="wppbh-products-data-section">
 					<Table.Head>
 						<Table.Row>
-							<Table.Header>{__( 'Products & Services', 'wp-plugin-bluehost' )}</Table.Header>
-							<Table.Header>{__( 'Renewal Date', 'wp-plugin-bluehost' )}</Table.Header>
-							<Table.Header>{__( 'Renewal Setting', 'wp-plugin-bluehost' )}</Table.Header>
+							<Table.Header>{__( 'Products & Services', 'wp-module-my-products' )}</Table.Header>
+							<Table.Header>{__( 'Renewal Date', 'wp-module-my-products' )}</Table.Header>
+							<Table.Header>{__( 'Renewal Setting', 'wp-module-my-products' )}</Table.Header>
 						</Table.Row>
 					</Table.Head>
 					<Table.Body>
@@ -87,7 +88,7 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 								</Table.Cell>
 								<Table.Cell>
 									<a href="https://www.bluehost.com/my-account/renewal-center">
-									{__( 'Manage Renewal', 'wp-plugin-bluehost' )}
+									{__( 'Manage Renewal', 'wp-module-my-products' )}
 									</a>
 								</Table.Cell>
 							</Table.Row>
