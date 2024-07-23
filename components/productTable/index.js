@@ -60,7 +60,6 @@ const ProductsTable = ( { methods, constants, ...props } ) => {
 					setProductData( [] ); // Or any default value
 				} );
 		}
-		console.log(productData);
 	}, [] );
     
 	return (
