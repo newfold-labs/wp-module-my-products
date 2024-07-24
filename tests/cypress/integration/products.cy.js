@@ -8,7 +8,7 @@ describe( 'My Products', function () {
 		cy.visit(
 			'/wp-admin/admin.php?page=' +
 				Cypress.env( 'pluginId' ) +
-				'#/products'
+				'#/home'
 		);
 		cy.window()
 			.its( 'NewfoldRuntime' )
@@ -19,7 +19,7 @@ describe( 'My Products', function () {
 	} );
 
 	it( 'My Products Exists', () => {
-		cy.get( '.wppbh-products' )
+		cy.get( '.wppbh-home' )
 			.contains( 'My Products' )
 			.scrollIntoView()
 			.should( 'be.visible' );
@@ -47,7 +47,7 @@ describe( 'My Products', function () {
 			[]
 		);
 		cy.reload();
-		cy.get( '.wppbh-products' )
+		cy.get( '.wppbh-products-section' )
 			.contains( 'Sorry, no products. Please, try again later.' )
 			.scrollIntoView()
 			.should( 'be.visible' );
@@ -60,7 +60,7 @@ describe( 'My Products', function () {
 			{}
 		);
 		cy.reload();
-		cy.get( '.wppbh-products' )
+		cy.get( '.wppbh-products-section' )
 			.contains(
 				'Oops, there was an error loading products, please try again later.'
 			)
