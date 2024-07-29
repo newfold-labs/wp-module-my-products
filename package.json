@@ -1,0 +1,23 @@
+{
+    "name": "@newfold-labs/wp-module-my-products",
+    "description": "A module for rendering user-specific product data utilizing the Hiive Users API, which integrates with the Fulfilment Gateway API.",
+    "license": "GPL-2.0-or-later",
+    "private": true,
+    "contributors": [
+      "Vara Prasad Maruboina",
+      "Girish Lokapure"
+    ],
+    "dependencies": {
+      "@heroicons/react": "^2.1.4",
+      "@newfold/ui-component-library": "^1.1.0",
+      "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+      "@tailwindcss/forms": "^0.5.7",
+      "tailwindcss": "^3.4.1",
+      "@testing-library/cypress": "^9.0.0",
+      "cypress": "^12.9.0",
+      "cypress-axe": "^1.4.0"
+    }
+    
+  }
