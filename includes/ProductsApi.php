@@ -3,10 +3,11 @@
 namespace NewFoldLabs\WP\Module\MyProducts;
 
 use NewfoldLabs\WP\Module\Data\HiiveConnection;
+use WP_Error;
+use WP_HTTP_Response;
 use WP_REST_Controller;
+use WP_REST_Response;
 use WP_REST_Server;
-use function NewfoldLabs\WP\ModuleLoader\container;
-
 
 /**
  * Class ProductsApi
@@ -58,7 +59,7 @@ class ProductsApi {
 	/**
 	 * Get products data
 	 *
-	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function products_callback() {
 
@@ -69,13 +70,13 @@ class ProductsApi {
 		$hiive_response = $this->hiive->hiive_request( self::HIIVE_API_PRODUCTS_ENDPOINT, array(), $args );
 
 		if ( is_wp_error( $hiive_response ) ) {
-			return new \WP_REST_Response( $hiive_response->get_error_message(), 401 );
+			return new WP_REST_Response( $hiive_response->get_error_message(), 500 );
 		}
 
 		$status_code = wp_remote_retrieve_response_code( $hiive_response );
 
 		if ( 200 !== $status_code ) {
-			return new \WP_REST_Response( wp_remote_retrieve_response_message( $hiive_response ), $status_code );
+			return new WP_REST_Response( wp_remote_retrieve_response_message( $hiive_response ), $status_code );
 		}
 
 		$payload = json_decode( wp_remote_retrieve_body( $hiive_response ) );
@@ -83,6 +84,6 @@ class ProductsApi {
 			$products = $payload;
 		}
 
-		return new \WP_REST_Response( $products, 200 );
+		return new WP_REST_Response( $products, 200 );
 	}
 }
