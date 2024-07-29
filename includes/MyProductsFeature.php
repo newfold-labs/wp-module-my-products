@@ -31,15 +31,13 @@ class MyProductsFeature extends \NewfoldLabs\WP\Module\Features\Feature {
 	 * Initialize my products feature.
 	 */
 	public function initialize() {
-		if ( function_exists( 'add_action' ) ) {
 
-			// Register module
-			add_action(
-				'plugins_loaded',
-				function () {
-					new Products( getContainer() );
-				}
-			);
-		}
+		// Register module
+		add_action(
+			'plugins_loaded',
+			function () {
+				new Products( getContainer() );
+			}
+		);
 	}
 }
