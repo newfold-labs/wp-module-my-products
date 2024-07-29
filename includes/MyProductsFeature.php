@@ -2,8 +2,6 @@
 
 namespace NewfoldLabs\WP\Module\MyProducts;
 
-use NewfoldLabs\WP\ModuleLoader\Container;
-use NewfoldLabs\WP\Module\MyProducts\Products;
 use function NewfoldLabs\WP\ModuleLoader\container as getContainer;
 
 /**
@@ -23,7 +21,7 @@ class MyProductsFeature extends \NewfoldLabs\WP\Module\Features\Feature {
 	/**
 	 * The feature value. Defaults to on.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $value = true;
 
@@ -31,15 +29,13 @@ class MyProductsFeature extends \NewfoldLabs\WP\Module\Features\Feature {
 	 * Initialize my products feature.
 	 */
 	public function initialize() {
-		if ( function_exists( 'add_action' ) ) {
 
-			// Register module
-			add_action(
-				'plugins_loaded',
-				function () {
-					new Products( getContainer() );
-				}
-			);
-		}
+		// Register module
+		add_action(
+			'plugins_loaded',
+			function () {
+				new Products( getContainer() );
+			}
+		);
 	}
 }

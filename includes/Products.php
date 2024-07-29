@@ -27,13 +27,13 @@ class Products {
 		$this->container = $container;
 
 		// Module functionality goes here
-		add_action( 'rest_api_init', array( self::class, 'init_product_apis' ) );
+		add_action( 'rest_api_init', array( $this, 'init_product_apis' ) );
 	}
 
 	/**
 	 * Initialize the Product API Controller.
 	 */
-	public static function init_product_apis(): void {
+	public function init_product_apis(): void {
 		// Create a HiiveConnection
 		$hiive = new HiiveConnection();
 
