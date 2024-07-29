@@ -15,10 +15,12 @@ if ( defined( 'NFD_DATA_MODULE_MY_PRODUCTS' ) ) {
 
 define( 'NFD_DATA_MODULE_MY_PRODUCTS', '1.0.0' );
 
+/**
+ * @see Features::initFeatures()
+ */
 add_filter(
-    'newfold/features/filter/register',
-    function ( $features ) {
-        return array_merge( $features, array( MyProductsFeature::class ) );
-    }
+	'newfold/features/filter/register',
+	function ( array $features ): array {
+		return array_merge( $features, array( MyProductsFeature::class ) );
+	}
 );
-
