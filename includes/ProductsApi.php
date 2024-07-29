@@ -79,7 +79,7 @@ class ProductsApi {
 			return new WP_REST_Response( wp_remote_retrieve_response_message( $hiive_response ), $status_code );
 		}
 
-		$payload = json_decode( wp_remote_retrieve_body( $hiive_response ) );
+		$payload = json_decode( wp_remote_retrieve_body( $hiive_response ), true );
 		if ( $payload && is_array( $payload ) ) {
 			$products = $payload;
 		}
