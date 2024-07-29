@@ -4,8 +4,8 @@ namespace NewfoldLabs\WP\Module\MyProducts;
 
 use function NewfoldLabs\WP\ModuleLoader\register;
 
-if (!defined('ABSPATH')) {
-    return;
+if ( ! defined( 'ABSPATH' ) ) {
+	return;
 }
 
 // Do not allow multiple copies of the module to be active
