@@ -2,8 +2,6 @@
 
 namespace NewfoldLabs\WP\Module\MyProducts;
 
-use NewfoldLabs\WP\ModuleLoader\Container;
-use NewfoldLabs\WP\Module\MyProducts\Products;
 use function NewfoldLabs\WP\ModuleLoader\container as getContainer;
 
 /**
@@ -23,7 +21,7 @@ class MyProductsFeature extends \NewfoldLabs\WP\Module\Features\Feature {
 	/**
 	 * The feature value. Defaults to on.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $value = true;
 
