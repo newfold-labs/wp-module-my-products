@@ -7,15 +7,16 @@ use WP_REST_Controller;
 use WP_REST_Server;
 use function NewfoldLabs\WP\ModuleLoader\container;
 
-/**
- * Hiive API endpoint for fetching products.
- */
-define( 'HIIVE_API_PRODUCTS_ENDPOINT', 'sites/v1/customer/products' );
 
 /**
  * Class ProductsApi
  */
 class ProductsApi {
+
+    /**
+     * Hiive API endpoint for fetching products.
+     */
+    const HIIVE_API_PRODUCTS_ENDPOINT = 'sites/v1/customer/products';
 
 	/**
 	 * Instance of the HiiveConnection class.
@@ -65,7 +66,7 @@ class ProductsApi {
 		$args           = array(
 			'method' => 'GET',
 		);
-		$hiive_response = $this->hiive->hiive_request( HIIVE_API_PRODUCTS_ENDPOINT, array(), $args );
+		$hiive_response = $this->hiive->hiive_request( self::HIIVE_API_PRODUCTS_ENDPOINT, array(), $args );
 
 		if ( is_wp_error( $hiive_response ) ) {
 			return new \WP_REST_Response( $hiive_response->get_error_message(), 401 );
