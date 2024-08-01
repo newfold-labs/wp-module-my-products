@@ -4,7 +4,6 @@ import ProductsTable from '../productTable';
 const defaults = {
 	text: {
 		jarvisText: __( 'Please login to your account manager to see products.', 'wp-module-my-products' ),
-		error: __( 'Oops, there was an error loading products, please try again later.', 'wp-module-my-products' ),
 		noProducts: __( 'Sorry, no products. Please, try again later.', 'wp-module-my-products' ),
 	},
 };
@@ -20,12 +19,70 @@ const NewfoldProducts = ( { methods, constants, ...props } ) => {
 
     // set defaults if not provided
 	constants = Object.assign( defaults, constants );
-	
-    return (
+
+	const [ productData, setProductData ] = methods.useState( [] );
+	const [ isError, setIsError ] = methods.useState( false );
+	const [ showSection, setShowSection ] = methods.useState( false );
+	const [ errorMsg, setErrorMsg ] = methods.useState( '' );
+
+	/**
+	 * on mount load all customer's products
+	 */
+	useEffect( () => {
+		console.log( 'hi' );
+		if ( methods.isJarvis() ) {
+			methods
+				.apiFetch( {
+					url: methods.NewfoldRuntime.createApiUrl(
+						'/newfold-my-products/v1/products'
+					),
+					method: 'GET',
+				} )
+				.then( ( response ) => {
+					if ( ! response ) {
+						throw new Error();
+					}
+					setShowSection(true);
+					if ( Array.isArray( response ) && response.length === 0 ) {
+						throw new Error( 'Empty array' );
+					}
+					setProductData( response );
+				} )
+				.catch( ( error ) => {
+					setIsError( true );
+					if ( error.message === 'Empty array' ) {
+						setErrorMsg( constants.text.noProducts );
+					}
+					setProductData( [] ); // Or any default value
+				} );
+		}
+	}, [] );
+
+	return (
 		<>
-				<Container.Block>
-						<ProductsTable methods={ methods } constants={ constants } { ...props } />
-				</Container.Block>
+			{ showSection && (
+				<>
+					<Container.Header title={ constants.text.title }>
+						<p>
+							{ constants.text.subTitle }
+							<a href={ constants.text.renewalCenterUrl }>
+								{ constants.text.renewalText }
+							</a>
+						</p>
+					</Container.Header>
+					<Container.Block>
+						{ isError && errorMsg }
+						{ ! isError && (
+							<ProductsTable
+								methods={ methods }
+								constants={ constants }
+								productData={ productData }
+								{ ...props }
+							/>
+						) }
+					</Container.Block>
+				</>
+			) }
 		</>
 	);
 };
