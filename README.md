@@ -36,4 +36,4 @@ A module for rendering user-specific product data utilizing the Hiive Users API,
  composer require newfold-labs/wp-module-my-products
 ```
 
-[More on NewFold WordPress Modules](https://github.com/newfold-labs/wp-module-loader)
+[More on Newfold WordPress Modules](https://github.com/newfold-labs/wp-module-loader)
