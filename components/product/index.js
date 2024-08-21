@@ -3,8 +3,14 @@ import ProductsTable from '../productTable';
 
 const defaults = {
 	text: {
-		jarvisText: __( 'Please login to your account manager to see products.', 'wp-module-my-products' ),
-		noProducts: __( 'Sorry, no products. Please, try again later.', 'wp-module-my-products' ),
+		jarvisText: __(
+			'Please login to your account manager to see products.',
+			'wp-module-my-products'
+		),
+		noProducts: __(
+			'Sorry, no products. Please, try again later.',
+			'wp-module-my-products'
+		),
 	},
 };
 
@@ -13,23 +19,19 @@ const defaults = {
  * For use in brand app to display user's products
  *
  * @param {*} props
- * @return
+ * @return {JSX.Element} Products Module
  */
 const NewfoldProducts = ( { methods, constants, ...props } ) => {
-
-    // set defaults if not provided
-	constants = Object.assign( defaults, constants );
-
 	const [ productData, setProductData ] = methods.useState( [] );
 	const [ isError, setIsError ] = methods.useState( false );
 	const [ showSection, setShowSection ] = methods.useState( false );
 	const [ errorMsg, setErrorMsg ] = methods.useState( '' );
 
-	/**
-	 * on mount load all customer's products
-	 */
+	// set defaults if not provided
+	constants = Object.assign( defaults, constants );
+
+	// on mount fetch customer's products
 	useEffect( () => {
-		console.log( 'hi' );
 		if ( methods.isJarvis() ) {
 			methods
 				.apiFetch( {
@@ -42,15 +44,15 @@ const NewfoldProducts = ( { methods, constants, ...props } ) => {
 					if ( ! response ) {
 						throw new Error();
 					}
-					setShowSection(true);
+					setShowSection( true );
 					if ( Array.isArray( response ) && response.length === 0 ) {
-						throw new Error( 'Empty array' );
+						throw new Error( 'Empty products list' );
 					}
 					setProductData( response );
 				} )
 				.catch( ( error ) => {
 					setIsError( true );
-					if ( error.message === 'Empty array' ) {
+					if ( error.message === 'Empty products list' ) {
 						setErrorMsg( constants.text.noProducts );
 					}
 					setProductData( [] ); // Or any default value
@@ -77,7 +79,6 @@ const NewfoldProducts = ( { methods, constants, ...props } ) => {
 								methods={ methods }
 								constants={ constants }
 								productData={ productData }
-								{ ...props }
 							/>
 						) }
 					</Container.Block>
