@@ -8,7 +8,7 @@ describe( 'My Products Section', function () {
 		cy.intercept(
 			{
 				method: 'GET',
-				url: /newfold-my-products(\/|%2F)v1(\/|%2F)product/,
+				url: /newfold-my-products(\/|%2F)v1(\/|%2F)products/,
 			},
 			userProductsFixtures
 		).as( 'user_products' );
@@ -16,7 +16,14 @@ describe( 'My Products Section', function () {
 		cy.visit(
 			'/wp-admin/admin.php?page=' +
 				Cypress.env( 'pluginId' ) +
-				'#/home'
+				'#/home',
+			{
+				onLoad() {
+					cy.window().then( ( win ) => {
+						win.NewfoldRuntime.capabilities.abTestShowMyProducts = true;
+					} );
+				},
+			}
 		);
 
 		cy.injectAxe();
