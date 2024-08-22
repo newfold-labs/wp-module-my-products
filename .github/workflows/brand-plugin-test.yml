@@ -32,6 +32,5 @@ jobs:
       module-repo: ${{ github.repository }}
       module-branch: ${{ needs.setup.outputs.branch }}
       plugin-repo: 'bluehost/bluehost-wordpress-plugin'
-      plugin-branch: 'release/3.15.0'
       sync-npm-package: true
     secrets: inherit
