@@ -14,10 +14,15 @@ use WP_REST_Server;
  */
 class ProductsApi {
 
-    /**
-     * Hiive API endpoint for fetching products.
-     */
-    const HIIVE_API_PRODUCTS_ENDPOINT = 'sites/v1/customer/products';
+	/**
+	 * Transient name where user products data is stored.
+	 */
+	const TRANSIENT = 'newfold_my_products';
+
+	/**
+	 * Hiive API endpoint for fetching products.
+	 */
+	const HIIVE_API_PRODUCTS_ENDPOINT = 'sites/v1/customer/products';
 
 	/**
 	 * Instance of the HiiveConnection class.
@@ -57,31 +62,49 @@ class ProductsApi {
 	}
 
 	/**
+	 * Set the transient where user products is stored (6 Hours).
+	 *
+	 * @param array     $data array of products.
+	 * @param float|int $expiration    Transient expiration.
+	 */
+	public function setTransient( $data, $expiration = 21600 ) {
+		set_transient( self::TRANSIENT, $data, $expiration );
+	}
+
+	/**
 	 * Get products data
 	 *
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function products_callback() {
 
-		$products       = array();
-		$args           = array(
-			'method' => 'GET',
-		);
-		$hiive_response = $this->hiive->hiive_request( self::HIIVE_API_PRODUCTS_ENDPOINT, array(), $args );
+		$products = get_transient( self::TRANSIENT );
 
-		if ( is_wp_error( $hiive_response ) ) {
-			return new WP_REST_Response( $hiive_response->get_error_message(), 500 );
-		}
+		if ( false === $products ) {
 
-		$status_code = wp_remote_retrieve_response_code( $hiive_response );
+			$products       = array();
+			$args           = array(
+				'method' => 'GET',
+			);
+			$hiive_response = $this->hiive->hiive_request( self::HIIVE_API_PRODUCTS_ENDPOINT, array(), $args );
 
-		if ( 200 !== $status_code ) {
-			return new WP_REST_Response( wp_remote_retrieve_response_message( $hiive_response ), $status_code );
-		}
+			if ( is_wp_error( $hiive_response ) ) {
+				return new WP_REST_Response( $hiive_response->get_error_message(), 500 );
+			}
 
-		$payload = json_decode( wp_remote_retrieve_body( $hiive_response ), true );
-		if ( $payload && is_array( $payload ) ) {
-			$products = $payload;
+			$status_code = wp_remote_retrieve_response_code( $hiive_response );
+
+			if ( 200 !== $status_code ) {
+				return new WP_REST_Response( wp_remote_retrieve_response_message( $hiive_response ), $status_code );
+			}
+
+			$payload = json_decode( wp_remote_retrieve_body( $hiive_response ), true );
+			if ( $payload && is_array( $payload ) ) {
+				$products = $payload;
+
+				$this->setTransient( $products );
+			}
+
 		}
 
 		return new WP_REST_Response( $products, 200 );
