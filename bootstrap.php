@@ -2,8 +2,6 @@
 
 namespace NewfoldLabs\WP\Module\MyProducts;
 
-use function NewfoldLabs\WP\ModuleLoader\register;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
@@ -13,7 +11,7 @@ if ( defined( 'NFD_DATA_MODULE_MY_PRODUCTS' ) ) {
 	return;
 }
 
-define( 'NFD_DATA_MODULE_MY_PRODUCTS', '1.0.0' );
+define( 'NFD_DATA_MODULE_MY_PRODUCTS', '1.0.1' );
 
 /**
  * @see Features::initFeatures()

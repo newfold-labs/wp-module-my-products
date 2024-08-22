@@ -33,10 +33,10 @@ const determineMessage = ( autoRenewFlag, expirationDate ) => {
 	return `${ __( 'Expires:', 'wp-module-my-products' ) } ${ formattedDate }`;
 };
 
-const ProductsTable = ( { methods, constants, productData } ) => {
+const MyProductsTable = ( { methods, constants, userProducts } ) => {
 	return (
 		<div>
-			<Table className="wppbh-products-data-section">
+			<Table className="newfold-my-products-table">
 				<Table.Head>
 					<Table.Row>
 						<Table.Header>
@@ -54,7 +54,7 @@ const ProductsTable = ( { methods, constants, productData } ) => {
 					</Table.Row>
 				</Table.Head>
 				<Table.Body>
-					{ productData.map( ( product ) => (
+					{ userProducts.map( ( product ) => (
 						<Table.Row key={ product.prodId }>
 							<Table.Cell>{ product.prodName }</Table.Cell>
 							<Table.Cell>
@@ -79,4 +79,4 @@ const ProductsTable = ( { methods, constants, productData } ) => {
 	);
 };
 
-export default ProductsTable;
+export default MyProductsTable;
