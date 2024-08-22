@@ -62,7 +62,7 @@ const NewfoldMyProducts = ( { methods, constants, ...props } ) => {
 		fetchUserProducts();
 	}, [] );
 
-	if ( isLoading ) {
+	if ( isLoading || ( isError && ! errorMsg ) ) {
 		return null;
 	}
 
