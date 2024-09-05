@@ -21,6 +21,7 @@ describe( 'My Products Section', function () {
 				onLoad() {
 					cy.window().then( ( win ) => {
 						win.NewfoldRuntime.capabilities.abTestShowMyProducts = true;
+						win.NewfoldRuntime.capabilities.isJarvis = true;
 					} );
 				},
 			}
