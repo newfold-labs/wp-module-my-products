@@ -33,5 +33,4 @@ jobs:
       module-branch: ${{ needs.setup.outputs.branch }}
       plugin-repo: 'bluehost/bluehost-wordpress-plugin'
       plugin-branch: 'try/fix-my-products-tests'
-      sync-npm-package: true
     secrets: inherit
