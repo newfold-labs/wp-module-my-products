@@ -32,6 +32,20 @@ class ProductsApi {
 	private $hiive;
 
 	/**
+	 * Namespace for the REST API.
+	 *
+	 * @var string
+	 */
+	private $namespace;
+
+	/**
+	 * REST base for the products endpoint.
+	 *
+	 * @var string
+	 */
+	private $rest_base;
+
+	/**
 	 * ProductsApi constructor.
 	 *
 	 * @param HiiveConnection $hiive           Instance of the HiiveConnection class.
