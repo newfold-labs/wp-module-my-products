@@ -118,7 +118,6 @@ class ProductsApi {
 
 				$this->setTransient( $products );
 			}
-
 		}
 
 		return new WP_REST_Response( $products, 200 );
