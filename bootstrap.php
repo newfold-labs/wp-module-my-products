@@ -11,7 +11,7 @@ if ( defined( 'NFD_DATA_MODULE_MY_PRODUCTS' ) ) {
 	return;
 }
 
-define( 'NFD_DATA_MODULE_MY_PRODUCTS', '1.0.3' );
+define( 'NFD_DATA_MODULE_MY_PRODUCTS', '1.0.7' );
 
 /**
  * @see Features::initFeatures()
