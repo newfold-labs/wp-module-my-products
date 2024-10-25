@@ -6,10 +6,12 @@
 
 # WordPress Products Module
 
-[![Version Number](https://img.shields.io/github/v/release/newfold-labs/wp-module-my-products?color=21a0ed&labelColor=333333)](https://github.com/newfold/wp-module-my-products/releases)
+[![Version Number](https://img.shields.io/github/v/release/newfold-labs/wp-module-my-products?color=21a0ed&labelColor=333333)](https://github.com/newfold-labs/wp-module-my-products/releases)
 [![License](https://img.shields.io/github/license/newfold-labs/wp-module-my-products?labelColor=333333&color=666666)](https://raw.githubusercontent.com/newfold-labs/wp-module-my-products/master/LICENSE)
 
 A module for rendering user-specific product data utilizing the Hiive Users API, which integrates with the Fulfilment Gateway API.
+
+This module has been discontinued and archived.
 
 ## Module Responsibilities
 
